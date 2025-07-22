@@ -32,7 +32,8 @@ const DELEGATE_CONTRACT = new ethers.Contract(
 async function init() {
     const auth = await signer.authorize({
         address: targetAddress,
-        nonce: await signer.getNonce() + 1
+        nonce: await signer.getNonce() + 1,
+        chainId: 11155111
     });
     console.log("Authorization created with nonce:", auth.nonce);
 
