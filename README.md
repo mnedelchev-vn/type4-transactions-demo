@@ -24,5 +24,8 @@ The usual flow for requesting a flashloan is requiring the flashloan to be reque
 
 Here is a sample transaction of the flow described above - [https://sepolia.etherscan.io/tx/0xd6ae72694b4f493a05f427630b89d201a516a5fec2c13bd98b729e157e3c5c7c](https://sepolia.etherscan.io/tx/0xd6ae72694b4f493a05f427630b89d201a516a5fec2c13bd98b729e157e3c5c7c)
 
+#### Example #3 - Showcase of the EIP-7702 front-run attack vector
+ Running `type4-frontrun-example.js` will demonstrate how a regular user authorization can be front-ran by a malicious user. The nature of EIP-7702 is that the actual authorization is passed separatedly from the calldata and a malicious user who is watching over the mempool can extract only the authorization part signed by the regular user, update the calldata in order to cause damage to the regular user and broadcast new transaction with higher gas with the user's `authorizationList`, but with the maliciously updated calldata. The solution for this is to validate the calldata to be signed by the same address who signed the authorization list.
+
 > [!WARNING]
 > This repo serve as a demo and the code here should not be copied and used in production. Enabling EOAs to act as smart contracts through delegation introduces new challenges and risks which should be considered.
